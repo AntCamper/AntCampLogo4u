@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-import('inquirer').then(inquirer => {
+import('inquirer').then(({ prompt }) => {
  const questions = [
     {
       type: 'input',
@@ -50,7 +50,7 @@ import('inquirer').then(inquirer => {
     },
  ];
 
- inquirer.prompt(questions).then((answers) => {
+ prompt(questions).then((answers) => {
     const licenseBadge = answers.license !== 'None' ? `![License: ${answers.license}](https://img.shields.io/badge/License-${answers.license}-blue.svg)` : '';
     const readmeContent = `# ${answers.title}\n\n${licenseBadge}\n\n## Description\n\n${answers.description}\n\n## Installation\n\n${answers.installation}\n\n## Usage\n\n${answers.usage}\n\n## License\n\nThis project is licensed under the ${answers.license} License.\n\n## Contributing\n\n${answers.contributing}\n\n## Tests\n\n${answers.tests}\n\n## Questions\n\nIf you have any questions about the repo, open an issue or contact me directly at ${answers.email}. You can find more of my work at [${answers.githubUsername}](https://github.com/${answers.githubUsername}).`;
 
