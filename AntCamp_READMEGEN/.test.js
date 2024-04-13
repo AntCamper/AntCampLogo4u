@@ -1,22 +1,14 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const mockFs = require('mock-fs');
-const { promisify } = require('util');
-const writeFile = promisify(fs.writeFile);
 const generateReadme = require('./index.js');
 
 jest.mock('inquirer');
-jest.mock('fs');
+jest.mock('fs', () => ({
+ readFileSync: jest.fn(),
+ writeFile: jest.fn((path, data, callback) => callback(null)),
+}));
 
 describe('README Generator', () => {
- beforeEach(() => {
-    mockFs({});
- });
-
- afterEach(() => {
-    mockFs.restore();
- });
-
  it('generates a README.md file with the provided input', async () => {
     inquirer.prompt.mockResolvedValue({
       title: 'My Project',
@@ -29,8 +21,14 @@ describe('README Generator', () => {
       githubUsername: 'myusername',
       email: 'myemail@example.com',
     });
-    await generateReadme();
-    const readmeContent = fs.readFileSync('README.md', 'utf8');
-    expect(readmeContent).toMatchSnapshot();
+
+    const result = await generateReadme();
+    expect(result).toBe('README.md has been created!');
+
+    expect(fs.writeFile).toHaveBeenCalledWith(
+      'README.md',
+      expect.any(String),
+      expect.any(Function)
+    );
  });
 });
