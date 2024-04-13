@@ -1,18 +1,18 @@
-# AntCamp_ReadmeGen
+# AntCampREADMEGEN
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 
 ## Description
 
-It is a tool for your web projects to generate a readme for your project
+This is a tool for web developers to use for their projects to easily create README's
 
-## Installations
+## Installation
 
-clone this code from the AntCamp github account
+clone from our github account
 
 ## Usage
 
-after installation run vis node index.js
+navigate in your terminial to where you have cloned this repo to and run via node index.js
 
 ## License
 
@@ -20,12 +20,12 @@ This project is licensed under the MIT License.
 
 ## Contributing
 
-fork the repo and create a new branch make your changes then commit and push to you fork then send a pull request with a commit message of your changes
+fork this repo and then make your changes and then send in a pull request with a commit message
 
 ## Tests
 
-to test run npx jest or node test or both
+in your terminial run either npx jest or npm test
 
 ## Questions
 
-If you have any questions about the repo, open an issue or contact me directly at antcamper2000@gmail.com. You can find more of my work at [AntCamp](https://github.com/AntCamp).
+If you have any questions about the repo, open an issue or contact me directly at Antcamper2000@gmail.com. You can find more of my work at [AntCamper](https://github.com/AntCamper).
