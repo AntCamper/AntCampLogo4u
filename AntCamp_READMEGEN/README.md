@@ -4,15 +4,15 @@
 
 ## Description
 
-it is a tool designed to automatically create a README file for your projects.
+It is a tool for your web projects to generate a readme for your project
 
-## Installation
+## Installations
 
-clone this code from our github repository and run via node in your terminal
+clone this code from the AntCamp github account
 
 ## Usage
 
-after running with node you will then be prompted questions  to  answer  via input and choices after the questions the readme .md file will be  created 
+after installation run vis node index.js
 
 ## License
 
@@ -20,8 +20,12 @@ This project is licensed under the MIT License.
 
 ## Contributing
 
+fork the repo and create a new branch make your changes then commit and push to you fork then send a pull request with a commit message of your changes
 
 ## Tests
 
+to test run npx jest or node test or both
 
 ## Questions
+
+If you have any questions about the repo, open an issue or contact me directly at antcamper2000@gmail.com. You can find more of my work at [AntCamp](https://github.com/AntCamp).
