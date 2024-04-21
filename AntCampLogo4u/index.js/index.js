@@ -1,10 +1,10 @@
 const inquirer = require('inquirer');
-const fs = require('fs');  
+const fs = require('fs');
 
 const questions = [
     {
         type: 'input',
-        name: 'test',
+        name: 'text',
         message: 'What text would you like on your logo?',
     },
     {
@@ -28,6 +28,8 @@ const questions = [
 ];
 
 function generateSVGLogo(answers) {
+    console.log(answers);
+
     let svgString = `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">`;
    
     if (answers.shape === 'Circle') {
@@ -43,6 +45,6 @@ function generateSVGLogo(answers) {
    
     fs.writeFileSync('logo.svg', svgString);
     console.log('Logo generated successfully!');
-   }
+}
    
-   inquirer.prompt(questions).then(generateSVGLogo);
+inquirer.prompt(questions).then(generateSVGLogo);
