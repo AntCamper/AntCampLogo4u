@@ -4,7 +4,7 @@
     "description": "A command-line application to generate SVG logos for my UCB class",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "jest"
     },
     "author": "",
     "license": "ISC",
@@ -14,8 +14,4 @@
     "devDependencies": {
         "jest": "^27.5.1"
     }
-    "scripts": {
-        "test": "jest"
-       }
-       
 }

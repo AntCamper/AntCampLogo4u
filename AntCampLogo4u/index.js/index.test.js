@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { generateSVGLogo } = require('./index'); 
+const { generateSVGLogo } = require('./index.js'); 
 
 jest.mock('inquirer');
 
@@ -20,7 +20,7 @@ describe('generateSVGLogo', () => {
 
     fs.writeFileSync.mockImplementation(() => {});
 
-    await generateSVGLogo();
+    await generateSVGLogo(mockAnswers);
 
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       'logo.svg',
