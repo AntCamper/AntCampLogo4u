@@ -46,5 +46,9 @@ function generateSVGLogo(answers) {
     fs.writeFileSync('logo.svg', svgString);
     console.log('Logo generated successfully!');
 }
-   
-inquirer.prompt(questions).then(generateSVGLogo);
+
+function promptUserAndGenerateLogo() {
+    inquirer.prompt(questions).then(generateSVGLogo);
+}
+
+module.exports = { generateSVGLogo, promptUserAndGenerateLogo };
