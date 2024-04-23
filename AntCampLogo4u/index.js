@@ -51,4 +51,6 @@ function promptUserAndGenerateLogo() {
     inquirer.prompt(questions).then(generateSVGLogo);
 }
 
+promptUserAndGenerateLogo();
+
 module.exports = { generateSVGLogo, promptUserAndGenerateLogo };
