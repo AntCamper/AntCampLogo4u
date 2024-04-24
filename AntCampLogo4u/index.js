@@ -5,7 +5,7 @@ const questions = [
     {
         type: 'input',
         name: 'text',
-        message: 'What text would you like on your logo?',
+        message: 'up to three characters what text would you like on your logo?',
     },
     {
         type: 'input',
