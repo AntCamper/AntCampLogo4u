@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const fs = require("fs");
 
 router.get('/api/notes', async (req, res) => {
-    console.log('Get request to /api/notes'); // trying to debug cannot get /notes
+    console.log('Get request to /api/notes'); 
     const dbJson = await JSON.parse(fs.readFileSync("db/db.json", "utf8"));
     res.json(dbJson);
 });
