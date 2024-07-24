@@ -1,52 +1,67 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3001;
 const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const apiRoutes = require('./routes/apiRoutes/notes');
-const htmlRoutes = require('./routes/htmlRoutes/index');
+const cors = require('cors');
 
-app.get('/api/notes', function(req, res) {
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static('public'));
+
+// Helper functions
+function readNotes() {
+    const data = fs.readFileSync(path.join(__dirname, './db/db.json'), 'utf8');
+    return JSON.parse(data).notes;
+}
+
+function writeNotes(notes) {
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify({ notes: notes }, null, 2)
+    );
+}
+
+app.use(cors());
+
+// API Routes
+app.get('/api/notes', (req, res) => {
     const notes = readNotes();
     res.json(notes);
 });
 
-app.post('/api/notes', function(req, res) {
-    const note = req.body;
-    note.id = uuidv4();
+
+app.post('/api/notes', (req, res) => {
     const notes = readNotes();
-    notes.push(note);
+    const newNote = {
+        id: uuidv4(),
+        title: req.body.title,
+        text: req.body.text
+    };
+    notes.push(newNote);
     writeNotes(notes);
-    res.status(201).json(note);
+    res.json(newNote);
 });
 
-app.get('/notes', function(req, res) {
-    res.sendFile(path.join(__dirname + '/notes.html'));
+app.delete('/api/notes/:id', (req, res) => {
+    let notes = readNotes();
+    notes = notes.filter(note => note.id !== req.params.id);
+    writeNotes(notes);
+    res.json({ message: 'Note deleted' });
 });
 
-app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+// HTML Routes
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
-app.use('/api', apiRoutes);
-app.use(htmlRoutes);
-app.use(express.static('public'));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
-function readNotes() {
-    try {
-        const data = fs.readFileSync('./db.json', 'utf8');
-        return JSON.parse(data);
-    } catch (err) {
-        console.error(err);
-        return[];
-    }
-}
-
-function writeNotes(notes) {
-    fs.writeFileSync('./db.json', JSON.stringify(notes, null, 2));
-}
-
-app.listen(port, function () {
-    console.log(`App listening on port ${port}`);
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
 });
